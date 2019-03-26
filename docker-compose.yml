@@ -14,6 +14,9 @@ services:
     image: wqp_nwis_liquibase
     build:
       context: ./liquibase
+    networks:
+      wqp:
+        ipv4_address: ${LIQUIBASE_IPV4}
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - NWIS_WS_STAR_OWNER=${NWIS_WS_STAR_OWNER}
@@ -24,9 +27,15 @@ services:
       - EXTERNAL_OWNER_PASSWORD=${EXTERNAL_OWNER_PASSWORD}
       - INTERNAL_OWNER=${INTERNAL_OWNER}
       - INTERNAL_OWNER_PASSWORD=${INTERNAL_OWNER_PASSWORD}
+      - DATABASE_ADDRESS=${DATABASE_ADDRESS}
+      - DB_PORT=${DB_PORT}
 
     volumes:
       - ./liquibase/changeLogs:/opt/liquibase/workspace
       - ./liquibase/logs:/opt/liquibase/logs
       - ./liquibase/dbInit:/docker-entrypoint-initdb.d
 
+networks:
+  wqp:
+    external:
+      name: wqp

@@ -5,7 +5,7 @@ ${LIQUIBASE_HOME}/liquibase \
 	--classpath=${LIQUIBASE_HOME}/lib/${JDBC_JAR} \
 	--changeLogFile=${LIQUIBASE_WORKSPACE}/postgres/postgres/changeLog.yml \
 	--driver=org.postgresql.Driver \
-	--url=jdbc:postgresql://NWIS_WS_Star_Database:5432/postgres \
+	--url=jdbc:postgresql://${DATABASE_ADDRESS}:${DB_PORT}/postgres \
 	--username=postgres \
 	--password=${POSTGRES_PASSWORD} \
 	--logLevel=debug \
@@ -25,7 +25,7 @@ ${LIQUIBASE_HOME}/liquibase \
 	--classpath=${LIQUIBASE_HOME}/lib/${JDBC_JAR} \
 	--changeLogFile=${LIQUIBASE_WORKSPACE}/postgres/wqp/changeLog.yml \
 	--driver=org.postgresql.Driver \
-	--url=jdbc:postgresql://NWIS_WS_Star_Database:5432/${NWIS_WS_STAR_DATABASE_NAME} \
+	--url=jdbc:postgresql://${DATABASE_ADDRESS}:${DB_PORT}/${NWIS_WS_STAR_DATABASE_NAME} \
 	--username=postgres \
 	--password=${POSTGRES_PASSWORD} \
 	--logLevel=debug \
@@ -40,7 +40,7 @@ ${LIQUIBASE_HOME}/liquibase \
 	--classpath=${LIQUIBASE_HOME}/lib/${JDBC_JAR} \
 	--changeLogFile=${LIQUIBASE_WORKSPACE}/wqp/preload/changeLog.yml \
 	--driver=org.postgresql.Driver \
-	--url=jdbc:postgresql://NWIS_WS_Star_Database:5432/${NWIS_WS_STAR_DATABASE_NAME} \
+	--url=jdbc:postgresql://$DATABASE_ADDRESS:${DB_PORT}/${NWIS_WS_STAR_DATABASE_NAME} \
 	--username=${NWIS_WS_STAR_OWNER} \
 	--password=${NWIS_WS_STAR_OWNER_PASSWORD} \
 	--logLevel=debug \
