@@ -4,11 +4,14 @@ services:
     image: wqp_nwis_db
     build:
       context: .
+    networks:
+      wqp:
+        ipv4_address: ${DB_IPV4}
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - 5434:5432
-    container_name: NWIS_WS_Star_Database
+      - ${DB_PORT}:5432
+    container_name: ${DATABASE_ADDRESS}
 
   liquibase:
     image: wqp_nwis_liquibase
@@ -28,7 +31,6 @@ services:
       - INTERNAL_OWNER=${INTERNAL_OWNER}
       - INTERNAL_OWNER_PASSWORD=${INTERNAL_OWNER_PASSWORD}
       - DATABASE_ADDRESS=${DATABASE_ADDRESS}
-      - DB_PORT=${DB_PORT}
 
     volumes:
       - ./liquibase/changeLogs:/opt/liquibase/workspace
@@ -38,4 +40,4 @@ services:
 networks:
   wqp:
     external:
-      name: wqp
+      name: ${LOCAL_NETWORK_NAME}
